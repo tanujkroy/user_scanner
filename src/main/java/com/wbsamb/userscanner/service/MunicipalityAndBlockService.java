@@ -19,12 +19,12 @@ public class MunicipalityAndBlockService {
     private MunicipalityAndBlockDataRepository municipalityAndBlockDataRepository;
 
     public ResponseEntity<?> fetchInfoById(Long id) {
-        Optional<MunicipalityAndBlockData> all = municipalityAndBlockDataRepository.findByBlockCode(id);
+        Optional<MunicipalityAndBlockData> all = municipalityAndBlockDataRepository.findByBlockLgdCode(id);
          return ResponseHandler.generateResponse("fetch all district list", HttpStatus.OK, all);
     }
 
     public ResponseEntity<?> fetchDataByDistId(Long distId) {
-         List<MunicipalityAndBlockData> all = municipalityAndBlockDataRepository.findAllByDistrictLgdCode(distId);
+         List<MunicipalityAndBlockData> all = municipalityAndBlockDataRepository.findByDistrictLgdCode(distId);
          return ResponseHandler.generateResponse("fetch all district list", HttpStatus.OK, all);
     }
 
