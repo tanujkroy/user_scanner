@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-UserScannerApplication<user_scanner>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.wbsamb.userscanner.UserScannerApplication",
+            "projectName": "user_scanner",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
