@@ -18,13 +18,13 @@ public class MunicipalityAndBlockService {
     @Autowired
     private MunicipalityAndBlockDataRepository municipalityAndBlockDataRepository;
 
-    public ResponseEntity<?> fetchInfoById(String id) {
-        Optional<MunicipalityAndBlockData> all = municipalityAndBlockDataRepository.fetchByBlockCode(id);
+    public ResponseEntity<?> fetchInfoById(Long id) {
+        Optional<MunicipalityAndBlockData> all = municipalityAndBlockDataRepository.findByBlockCode(id);
          return ResponseHandler.generateResponse("fetch all district list", HttpStatus.OK, all);
     }
 
-    public ResponseEntity<?> fetchDataByDistId(String distId) {
-         List<MunicipalityAndBlockData> all = municipalityAndBlockDataRepository.fetchAllByDistrictLgdCode(distId);
+    public ResponseEntity<?> fetchDataByDistId(Long distId) {
+         List<MunicipalityAndBlockData> all = municipalityAndBlockDataRepository.findAllByDistrictLgdCode(distId);
          return ResponseHandler.generateResponse("fetch all district list", HttpStatus.OK, all);
     }
 

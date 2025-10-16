@@ -13,7 +13,4 @@ import lombok.ToString;
 @ToString
 public class AuthenticationResponse {
     private String token;
-
-
-    
 }

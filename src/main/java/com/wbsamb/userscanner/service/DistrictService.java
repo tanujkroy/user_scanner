@@ -24,7 +24,7 @@ public class DistrictService {
 
     }
 
-    public ResponseEntity<?> fetchDistrictInfoById(String ids) {
+    public ResponseEntity<?> fetchDistrictInfoById(Long ids) {
          Optional<DistrictData> all = districtDataRepository.findByDistrictLgdCode(ids);
        return ResponseHandler.generateResponse("fetch all district list", HttpStatus.OK, all);
     }

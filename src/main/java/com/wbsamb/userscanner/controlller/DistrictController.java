@@ -23,7 +23,7 @@ public class DistrictController {
     }
 
     @GetMapping("/fetchDistrictInfoById")
-    public ResponseEntity<?> fetchDistrictInfoById(@RequestParam String id){
+    public ResponseEntity<?> fetchDistrictInfoById(@RequestParam Long id){
         return districtService.fetchDistrictInfoById(id);
     }
 }

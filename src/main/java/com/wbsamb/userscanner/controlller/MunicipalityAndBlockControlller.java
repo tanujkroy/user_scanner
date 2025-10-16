@@ -22,12 +22,12 @@ public class MunicipalityAndBlockControlller {
     }
 
     @GetMapping("/findById")
-    public ResponseEntity<?> fetchInfoById(@RequestParam String id) {
+    public ResponseEntity<?> fetchInfoById(@RequestParam Long id) {
         return municipalityAndBlockService.fetchInfoById(id);
     }
 
     @GetMapping("/fetchDataByDistId")
-    public ResponseEntity<?> fetchDataByDistId(@RequestParam String distId) {
+    public ResponseEntity<?> fetchDataByDistId(@RequestParam Long distId) {
         return municipalityAndBlockService.fetchDataByDistId(distId);
     }
 }
