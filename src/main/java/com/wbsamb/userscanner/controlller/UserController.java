@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wbsamb.userscanner.model.User;
@@ -36,6 +37,17 @@ public class UserController {
     @GetMapping("/fetchMyQrCode")
     public ResponseEntity<?> fetchMyQrCode() {
         return userService.fetchMyQrCode();       
+    }
+
+    
+    @GetMapping("/findUserById")
+    public ResponseEntity<?> findUserById(@RequestParam Long id) {
+        return userService.findUserById(id);       
+    }
+    
+    @GetMapping("/findAllUserBaseOnAccess")
+    public ResponseEntity<?> findAllUserBaseOnAccess() {
+        return userService.findAllUserBaseOnAccess();       
     }
 
 }

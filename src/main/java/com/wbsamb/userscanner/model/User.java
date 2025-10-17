@@ -1,7 +1,12 @@
 package com.wbsamb.userscanner.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.wbsamb.userscanner.model.enums.Role;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,6 +25,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name="mst_user")
+@JsonIgnoreProperties({ "password"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +37,11 @@ public class User {
     private String password;
     private String mobile;
     @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     private boolean status;
-    private String qrCodeData; 
     private String qrCodePath; 
-    private String address;
+    private String userAddress;
     private String dist;
     private String municipalityOrBlock;
     private String panchayatName;

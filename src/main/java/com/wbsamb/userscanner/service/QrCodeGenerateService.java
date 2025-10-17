@@ -11,7 +11,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -24,35 +23,33 @@ public class QrCodeGenerateService {
     @Value("${file.upload-dir}")
     private String UPLOAD_DIR;
 
-    private final ObjectMapper mapper = new ObjectMapper();
 
-    public String generateQRCode(Object content, int width, int height) {
-        try {
-            // Serialize user object as JSON string
-            String jsonContent = mapper.writeValueAsString(content);
+   public String generateQRCode(Long userId, int width, int height) {
+    try {
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = qrCodeWriter.encode(String.valueOf(userId), BarcodeFormat.QR_CODE, width, height);
 
-            // Create QR code image
-            QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            BitMatrix bitMatrix = qrCodeWriter.encode(jsonContent, BarcodeFormat.QR_CODE, width, height);
-
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
             MatrixToImageWriter.writeToStream(bitMatrix, "PNG", stream);
             byte[] imageBytes = stream.toByteArray();
 
-            UUID uuid = UUID.randomUUID();
             String scannerDir = UPLOAD_DIR + "/userscanner";
             File uploadDir = new File(scannerDir);
-            if (!uploadDir.exists()) uploadDir.mkdirs();
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();
+            }
 
-            String fileName = uuid + ".png";
+            String fileName = UUID.randomUUID() + ".png";
             String uploadPath = scannerDir + "/" + fileName;
 
             Path path = Paths.get(uploadPath);
             Files.write(path, imageBytes);
-
-            return "/uploadfile/"+fileName;
-        } catch (WriterException | IOException e) {
-            throw new RuntimeException("QR Code generation failed", e);
+            
+            return "/uploadfile/" + fileName;
         }
+    } catch (WriterException | IOException e) {
+        throw new RuntimeException("QR Code generation failed", e);
     }
+}
+
 }
